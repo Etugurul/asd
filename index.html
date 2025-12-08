@@ -60,12 +60,37 @@
       opacity: 0;
     }
   }
+
+  /* BURASI EKLENDİ — NOT KUTUSU TASARIMI */
+  .note-box {
+    margin-top: 25px;
+    width: 80%;
+    max-width: 500px;
+    padding: 15px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    font-size: 16px;
+    line-height: 1.5;
+    color: white;
+  }
 </style>
 </head>
+
 <body>
   <h1 id="title">Buse’nin Doğum Gününe Kalan Süre 🎂</h1>
   <div id="countdown"></div>
   <div id="celebration">Doğum günün kutlu olsun Buse 💖 İyi ki doğdun, iyi ki varsın 🎈</div>
+
+  <!-- NOT KUTUN BURADA DOĞRU YERDE -->
+  <div class="note-box">
+    Buse ben senden hoşlanıyorum.  
+    Bunu yüz yüze söyleyecek cesareti kendimde bulamadığım için buraya yazıyorum.  
+    Bu siteyi yaparken bunu küçük bir şekilde belli etmek istemiştim ama belki fark etmedin.  
+    Hayatında özel bir yerim olmasını isterdim, olmadı.  
+    Bunu görmeyeceğini biliyorum ama yine de yazıp kendimi ifade etmek istedim.
+  </div>
 
 <script>
 function updateCountdown() {
