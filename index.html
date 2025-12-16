@@ -4,97 +4,90 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Buse'nin Doğum Günü</title>
+
 <style>
-  body {
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-family: "Poppins", sans-serif;
-    color: white;
-    text-align: center;
-    background: linear-gradient(-45deg, #ff9ec4, #c58eff, #74b9ff, #a29bfe);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
-  }
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  color: white;
+  text-align: center;
+  background: linear-gradient(-45deg, #ff9ec4, #c58eff, #74b9ff, #a29bfe);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
 
-  @keyframes gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-  h1 {
-    font-size: 2em;
-    margin: 10px;
-  }
+h1 {
+  font-size: 2em;
+  margin: 10px;
+}
 
-  #countdown {
-    font-size: 1.8em;
-  }
+#countdown {
+  font-size: 1.8em;
+}
 
-  #celebration {
-    display: none;
-    font-size: 2em;
-    font-weight: bold;
-    animation: blink 1s infinite;
-  }
+#celebration {
+  display: none;
+  font-size: 2em;
+  font-weight: bold;
+  animation: blink 1s infinite;
+}
 
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-  }
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
 
-  .confetti, .heart {
-    position: fixed;
-    top: -10px;
-    font-size: 24px;
-    animation: fall 5s linear infinite;
-  }
+.confetti, .heart {
+  position: fixed;
+  top: -10px;
+  font-size: 24px;
+  animation: fall 5s linear forwards;
+}
 
-  @keyframes fall {
-    to {
-      transform: translateY(110vh) rotate(360deg);
-      opacity: 0;
-    }
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
   }
-
-  /* BURASI EKLENDİ — NOT KUTUSU TASARIMI */
-  .note-box {
-    margin-top: 25px;
-    width: 80%;
-    max-width: 500px;
-    padding: 15px;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(8px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-    font-size: 16px;
-    line-height: 1.5;
-    color: white;
-  }
+}
 </style>
 </head>
 
 <body>
-  <h1 id="title">Buse’nin Doğum Gününe Kalan Süre 🎂</h1>
-  <div id="countdown"></div>
-  <div id="celebration">Doğum günün kutlu olsun Buse 💖 İyi ki doğdun, iyi ki varsın 🎈</div>
 
-  <!-- NOT KUTUN BURADA DOĞRU YERDE -->
+<h1 id="title">Buse’nin Doğum Gününe Kalan Süre 🎂</h1>
+<div id="countdown"></div>
+<div id="celebration">
+  Doğum günün kutlu olsun Buse 💖<br>
+  İyi ki doğdun, iyi ki varsın 🎈
+</div>
 
 <script>
+let celebrated = false;
+
 function updateCountdown() {
   const now = new Date();
 
-  // 🔥 Eğer bugün 17 Aralık ise
+  // 🎉 17 Aralık günü
   if (now.getDate() === 17 && now.getMonth() === 11) {
-    document.getElementById("countdown").style.display = "none";
-    document.getElementById("title").style.display = "none";
-    document.getElementById("celebration").style.display = "block";
-    startConfetti();
+    if (!celebrated) {
+      document.getElementById("countdown").style.display = "none";
+      document.getElementById("title").style.display = "none";
+      document.getElementById("celebration").style.display = "block";
+      startConfetti();
+      celebrated = true;
+    }
     return;
   }
 
@@ -111,18 +104,17 @@ function updateCountdown() {
   const minutes = Math.floor((diff / (1000 * 60)) % 60);
   const seconds = Math.floor((diff / 1000) % 60);
 
-  document.getElementById("countdown").innerHTML = 
+  document.getElementById("countdown").innerHTML =
     `${days} Gün ${hours} Saat ${minutes} Dakika ${seconds} Saniye`;
-}
 }
 
 function startConfetti() {
-  for (let i = 0; i < 60; i++) {
+  for (let i = 0; i < 80; i++) {
     const elem = document.createElement("div");
     elem.innerHTML = Math.random() > 0.5 ? "💖" : "🎉";
     elem.className = Math.random() > 0.5 ? "heart" : "confetti";
     elem.style.left = Math.random() * 100 + "vw";
-    elem.style.animationDuration = 3 + Math.random() * 2 + "s";
+    elem.style.animationDuration = (3 + Math.random() * 2) + "s";
     document.body.appendChild(elem);
     setTimeout(() => elem.remove(), 5000);
   }
@@ -131,5 +123,6 @@ function startConfetti() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 </script>
+
 </body>
 </html>
