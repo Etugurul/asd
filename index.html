@@ -88,8 +88,18 @@
 <script>
 function updateCountdown() {
   const now = new Date();
+
+  // 🔥 Eğer bugün 17 Aralık ise
+  if (now.getDate() === 17 && now.getMonth() === 11) {
+    document.getElementById("countdown").style.display = "none";
+    document.getElementById("title").style.display = "none";
+    document.getElementById("celebration").style.display = "block";
+    startConfetti();
+    return;
+  }
+
   let year = now.getFullYear();
-  let target = new Date(year, 11, 17); // 17 Aralık
+  let target = new Date(year, 11, 17);
 
   if (now > target) {
     target = new Date(year + 1, 11, 17);
@@ -101,15 +111,9 @@ function updateCountdown() {
   const minutes = Math.floor((diff / (1000 * 60)) % 60);
   const seconds = Math.floor((diff / 1000) % 60);
 
-  if (diff <= 0 && now.getDate() === 17 && now.getMonth() === 11) {
-    document.getElementById("countdown").style.display = "none";
-    document.getElementById("title").style.display = "none";
-    document.getElementById("celebration").style.display = "block";
-    startConfetti();
-  } else {
-    document.getElementById("countdown").innerHTML = 
-      `${days} Gün ${hours} Saat ${minutes} Dakika ${seconds} Saniye`;
-  }
+  document.getElementById("countdown").innerHTML = 
+    `${days} Gün ${hours} Saat ${minutes} Dakika ${seconds} Saniye`;
+}
 }
 
 function startConfetti() {
