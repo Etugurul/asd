@@ -38,7 +38,7 @@ const countdown = setInterval(() => {
           document.body.appendChild(el);
           setTimeout(() => el.remove(), 5000);
         }
-      }, 4000); // 🔁 her 4 saniyede bir
+      }, 2000); // 🔁 her 4 saniyede bir
     }
 
     return;
