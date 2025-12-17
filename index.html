@@ -74,21 +74,28 @@ h1 {
 </div>
 
 <script>
-let celebrated = false;
+let confettiTimer = null;
 
 function updateCountdown() {
   const now = new Date();
 
   // 🎉 17 Aralık günü
   if (now.getDate() === 17 && now.getMonth() === 11) {
-    if (!celebrated) {
-      document.getElementById("countdown").style.display = "none";
-      document.getElementById("title").style.display = "none";
-      document.getElementById("celebration").style.display = "block";
-      startConfetti();
-      celebrated = true;
+    document.getElementById("countdown").style.display = "none";
+    document.getElementById("title").style.display = "none";
+    document.getElementById("celebration").style.display = "block";
+
+    // Konfeti interval'i sadece 1 kere başlat
+    if (!confettiTimer) {
+      confettiTimer = setInterval(startConfetti, 2000);
     }
     return;
+  }
+
+  // 🎆 Doğum günü değilse konfeti durdur
+  if (confettiTimer) {
+    clearInterval(confettiTimer);
+    confettiTimer = null;
   }
 
   let year = now.getFullYear();
@@ -109,7 +116,7 @@ function updateCountdown() {
 }
 
 function startConfetti() {
-  for (let i = 0; i < 80; i++) {
+  for (let i = 0; i < 40; i++) {
     const elem = document.createElement("div");
     elem.innerHTML = Math.random() > 0.5 ? "💖" : "🎉";
     elem.className = Math.random() > 0.5 ? "heart" : "confetti";
